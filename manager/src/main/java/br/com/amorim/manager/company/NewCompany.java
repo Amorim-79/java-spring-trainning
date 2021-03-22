@@ -18,7 +18,13 @@ public class NewCompany extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-   		String companyName = req.getParameter("companyName");
+    	String companyName = req.getParameter("companyName");
+   		
+    	Database database = new Database();
+    	Company company = new Company(companyName);    	
+   		
+    	database.addCompanies(company);
+    	
     	PrintWriter output = resp.getWriter();
     	output.println("<html>");
    		output.println("<body>");
