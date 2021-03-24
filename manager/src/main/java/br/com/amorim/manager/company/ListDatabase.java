@@ -29,7 +29,7 @@ public class ListDatabase extends HttpServlet {
 		out.println("<html> <body>");
 		out.println("<ul>");
 		for (Company company : allCompanies) {
-			out.println("<li>" + company.getName() + "</li>");			
+			out.println("<li>" + company.getName() + "</li>");		
 		}
 		out.println("</ul>");
 		out.println("</body> </html>");
