@@ -26,7 +26,7 @@ public class NewCompany extends HttpServlet {
     	
     	Date initialDateCompanyFormatted = null;
 		try {
-			initialDateCompanyFormatted = new SimpleDateFormat().parse(initialDateCompany);
+			initialDateCompanyFormatted = new SimpleDateFormat("yyyy-MM-dd").parse(initialDateCompany);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,12 +37,7 @@ public class NewCompany extends HttpServlet {
    		
     	database.addCompanies(company);
     	
-    	PrintWriter output = resp.getWriter();
-    	output.println("<html>");
-   		output.println("<body>");
-   		output.println("<p> The " + companyName + " has been created with success!</p>");
-    	output.println("</body>");
-    	output.println("</html>");
+    	resp.sendRedirect("/manager/company/list");
    	}
 
 }

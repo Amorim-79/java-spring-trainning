@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.apache.catalina.connector.Response;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ListDatabase
  */
-@WebServlet("/ListDatabase")
+@WebServlet("/company/list")
 public class ListDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,14 +28,9 @@ public class ListDatabase extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Company> allCompanies = Database.listCompanies();
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html> <body>");
-		out.println("<ul>");
-		for (Company company : allCompanies) {
-			out.println("<li>" + company.getName() + "</li>");		
-		}
-		out.println("</ul>");
-		out.println("</body> </html>");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ListCompanies.jsp");
+		request.setAttribute("companies", allCompanies);
+		requestDispatcher.forward(request, response);
 	}
 
 }
